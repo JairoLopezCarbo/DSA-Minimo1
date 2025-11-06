@@ -120,7 +120,7 @@ public class SystemManagerImpl implements SystemManager {
 
     public Avion getAvion(String idAvion) {
         try {
-            if (!aviones.containsKey(idAvion)) throw new AvionAlreadyExistException(idAvion);
+            if (!aviones.containsKey(idAvion)) throw new AvionNotFoundException(idAvion);
         }
         catch (Exception e) {
             logger.error(e.getMessage());

@@ -1,5 +1,7 @@
 package edu.upc.dsa;
 
+import edu.upc.dsa.models.Avion;
+import edu.upc.dsa.models.Vuelo;
 import io.swagger.jaxrs.config.BeanConfig;
 import io.swagger.jersey.listing.ApiListingResourceJSON;
 import org.glassfish.grizzly.http.server.HttpServer;
@@ -56,6 +58,23 @@ public class Main {
      */
     public static void main(String[] args) throws IOException {
         final HttpServer server = startServer();
+
+        SystemManagerImpl manager = SystemManagerImpl.getInstance();
+        Avion avion1 = new Avion("AAA1", "Vueling", "Boeing 737");
+        Avion avion2 = new Avion("AAA2", "Ryanair", "Boeing 747");
+        Avion avion3 = new Avion("AAA3", "EasyJet", "Boeing 767");
+
+        manager.addAvion(avion1);
+        manager.addAvion(avion2);
+        manager.addAvion(avion3);
+
+        Vuelo vuelo1 = new Vuelo("VUELO1", "10:00", "12:00", avion1, "Barcelona", "Madrid");
+        Vuelo vuelo2 = new Vuelo("VUELO2", "13:00", "23:00", avion2, "China", "Francia");
+        Vuelo vuelo3 = new Vuelo("VUELO3", "16:00", "00:00", avion3, "Senegal", "Australia");
+
+        manager.addVuelo(vuelo1);
+        manager.addVuelo(vuelo2);
+        manager.addVuelo(vuelo3);
 
         StaticHttpHandler staticHttpHandler = new StaticHttpHandler("./public/");
         server.getServerConfiguration().addHttpHandler(staticHttpHandler, "/");
